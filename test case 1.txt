@@ -1,0 +1,54 @@
+*** Settings ***
+Library		Selenium2Library
+Suite Setup		Go to homepage
+Suite Teardown		Close All Browsers
+
+
+
+*** Variables ***
+${HOMEPAGE}		https://hotline.ua/
+${BROWSER}		google chrome
+
+
+*** Test Cases ***
+Open hotline and find Iphone
+	
+	Hotline and check results	Hotline - сравнить цены в интернет-магазинах Украины	Iphone 7		Hotline.ua - результаты поиска по запросу "Iphone 7"	iPhone 7
+
+*** Keywords ***
+
+Hotline and check results
+	[Arguments]		${result1}		${searchkey}	${result2}		${result3}
+	Wait Until Page Contains	${result1}
+	Input Text		id=searchbox	${searchkey}
+	Click Button	id=doSearch
+	Wait Until Page Contains	${result2}
+	Click Element	xpath://img[@data-img-product-id='8168075']
+	Wait Until Page Contains	${result3}
+	Click Element	xpath://span[@class='btn-orange']
+	Click Element	xpath://span[@class='city-name ellipsis']
+	Wait Until Page Contains Element	xpath://a[@data-id='458']
+	Click Element	xpath://a[@data-id='458']
+	Wait Until Page Contains Element	xpath://i[@class='fa-filter']
+	Click Element	xpath://i[@class='fa-filter']
+	Wait Until Page Contains Element	xpath://li[@data-tracking-id='product-59']
+	Click Element	xpath://li[@data-tracking-id='product-59']
+	Wait Until Page Contains Element	xpath://a[@href='/go/price/12909880285/']
+	Click Link		xpath://a[@href='/go/price/12909880285/']
+
+	
+
+	
+	
+Go to homepage
+	Open Browser	${HOMEPAGE}	${BROWSER}
+	
+	
+	
+
+	
+
+		
+	
+
+	
